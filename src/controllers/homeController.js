@@ -5,5 +5,12 @@ router.get('/', (req, res) => {
     res.render('home');
 });
 
+router.get('/about', (res, req) => {
+    res.render('about');
+});
+
+router.get('*', (res, req) => {
+    res.render('404');
+});
 
 module.exports = router;
