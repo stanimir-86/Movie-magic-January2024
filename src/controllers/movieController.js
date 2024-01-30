@@ -1,5 +1,7 @@
 const router = require('express').Router();
 
+const movieService = require('../services/movieService');
+
 router.get('/create', (req, res) => {
     res.render('create');
 });
@@ -7,8 +9,9 @@ router.get('/create', (req, res) => {
 router.post('/create', (req, res) => {
     const newMovie = req.body;
 
+    movieService.create(newMovie);
 
-    res.setEncoding('Movie should be crated');
+    res.send('Movie should be crated');
 });
 
 module.exports = router;
