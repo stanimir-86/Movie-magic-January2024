@@ -5,11 +5,11 @@ router.get('/', (req, res) => {
     res.render('home');
 });
 
-router.get('/about', (res, req) => {
+router.get('/about', (req,res) => {
     res.render('about');
 });
 
-router.get('/404', (res, req) => {
+router.get('/404', (req,res) => {
     res.render('404');
 });
 
