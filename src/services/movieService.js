@@ -1,10 +1,10 @@
-const Movie = require('../models/Movie');
-
+const Movie = require('../models/Models.js');
 
 const movies = [];
 
-exports.getAll = () => {
-    return movies.slice();
+exports.getAll = async () => {
+    const movies = await Movie.find();
+    return movies;
 };
 
 exports.search = (title, genre, year) => {
@@ -24,13 +24,13 @@ exports.search = (title, genre, year) => {
 }
 
 exports.getOne = (movieId) => {
-    const movie = movies.find(movie => movie._id == movieId);
+    const movie = Movie.find(movie => movie._id == movieId);
 
 
     return movie;
 }
 exports.create = async (movieData) => {
-    
+
     const result = await Movie.create(movieData)
 
     return result;
