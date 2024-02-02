@@ -5,7 +5,7 @@
             </h2>
         </div>
 
-        <form action="/create" method="" class="createForm">
+        <form action="/create" method="POST" class="createForm">
             <h2>Add Movie</h2>
             <ul class="noBullet">
                 <li>
@@ -30,7 +30,7 @@
                 </li>
                 <li>
                     <label for="image">Rating:</label>
-                    <input type="text" class="inputFields" id="rating" name="rating" />
+                    <input type="number" max="5" class="inputFields" id="rating" name="rating" />
                 </li>
                 <li>
                     <label for="description">Description:</label>
