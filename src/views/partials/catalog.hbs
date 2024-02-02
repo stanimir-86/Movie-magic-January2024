@@ -5,16 +5,14 @@
     </div>
     <div class="back">
         <h1>{{title}}</h1>
-        <h2>{{genre}}</h2>
-        <p>Description:{{description}} </p>
+        <h2>Genre: {{genre}}</h2>
+        <p>Description: {{description}}</p>
         <a href="/movies/{{_id}}" class="details">Details</a>
+        <a href="/movies/{{_id}}/attach" class="details">Attach</a>
     </div>
 </div>
-
 {{else}}
-
 <div class="no-posts">
     <p class="no-offer">There are no posts yet...</p>
 </div>
-
 {{/each}}
