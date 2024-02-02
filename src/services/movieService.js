@@ -1,40 +1,46 @@
-const Movie = require('../models/Models.js');
+const Movie = require('../models/Movie');
+const Cast = require('../models/Cast');
 
-const movies = [];
+exports.getAll = () => Movie.find();
 
-exports.getAll = async () => {
-    const movies = await Movie.find();
-    return movies;
-};
-
+// TODO: Filter result in mongoDB
 exports.search = (title, genre, year) => {
-    let result = movies.slice();
+    let query = {};
 
     if (title) {
-        result = result.filter(movie => movie.title.toLowerCase(title.toLoweCase()));
+        query.title = new RegExp(title, 'i');
     }
+
     if (genre) {
-        result = result.filter(movie => movie.genre.toLowerCase() === genre.toLowerCase());
-    }
-    if (genre) {
-        result = result.filter(movie => movie.year === year);
+        query.genre = genre.toLowerCase();
     }
 
-    return result;
-}
+    if (year) {
+        query.year = year;
+    }
 
-exports.getOne = (movieId) => {
-    const movie = Movie.find(movie => movie._id == movieId);
+    return Movie.find(query);
+};
 
+exports.getOne = (movieId) => Movie.findById(movieId).populate('casts');
+
+exports.create = (movieData) => Movie.create(movieData);
+
+exports.attach = async (movieId, castId) => {
+    // return Movie.findByIdAndUpdate(movieId, { $push: { casts: castId } });
+    const movie = await this.getOne(movieId);
+
+    // This is optional and we don't need it in this case
+    // const cast = await Cast.findById(castId);
+    // cast.movies.push(movie);
+    // await cast.save();
+
+    // TODO: validate castId if exists
+    // TODO: validate if cast is already added
+    movie.casts.push(cast);
+
+    await movie.save();
 
     return movie;
-}
-exports.create = async (movieData) => {
-
-    const result = await Movie.create(movieData)
-
-    return result;
-
-
 }
 
