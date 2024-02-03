@@ -2,7 +2,9 @@ const User = require('../models/User')
 const bcrypt = require('bcrypt');
 const jwt = require('../lib/jwt');
 
-const SECRET = '4w5y46uyetyjr6776rk6r68kr68';
+const { SECRET } = require('../config/config')
+
+
 
 exports.register = (userData) => User.create(userData);
 exports.login = async (email, password) => {
