@@ -25,12 +25,12 @@ router.post('/create', isAuth, async (req, res) => {
 router.get('/movies/:movieId', isAuth, async (req, res) => {
     const movieId = req.params.movieId;
     const movie = await movieService.getOne(movieId).lean();
-    // const casts = await castService.getByIds(movie.casts).lean();
+
 
     // TODO: This is not perfect, use handlebars helpers
     movie.rating = new Array(Number(movie.rating)).fill(true);
 
-    res.render('details', { movie });
+    res.render('movie/details', { movie });
 });
 
 router.get('/movies/:movieId/attach', isAuth, async (req, res) => {
